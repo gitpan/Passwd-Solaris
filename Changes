@@ -11,3 +11,8 @@ Revision history for Perl extension Passwd::Solaris.
 
 0.60  Thu Mar 25 whenever
 	- modified mgetpwnam to return crypted password
+
+0.65  Sat May 29 08:12:43 1999
+	- bug fix, report/solution provided by Jean-Pierre Gallou
+	- added O_TRUNC to open, files were having partial lines after
+	  rmpwnam

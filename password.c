@@ -2,7 +2,7 @@
  * password.c
  * implements safe password change non-interactive
  *
- * $Id: password.c,v 1.7 1999/03/25 22:13:26 eric Exp $
+ * $Id: password.c,v 1.8 1999/05/29 13:17:22 eric Exp $
  */
 
 #include <shadow.h>
@@ -43,7 +43,7 @@ _file_copy(char *from, char *to, mode_t mode, mode_t final_mode) {
   if (fpr == -1) {
     return(fpr);
   }
-  fpw = open(to, O_WRONLY|O_CREAT, mode);
+  fpw = open(to, O_WRONLY|O_CREAT|O_TRUNC, mode);
   if (fpw == -1) {
     error_save = errno;
     close(fpr);

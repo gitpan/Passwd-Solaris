@@ -20,7 +20,7 @@ require AutoLoader;
 		mgetpwnam
 		);
 
-$VERSION = '0.60';
+$VERSION = '0.65';
 
 sub AUTOLOAD {
     # This AUTOLOAD is used to 'autoload' constants from the constant()
