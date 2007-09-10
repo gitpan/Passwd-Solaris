@@ -7,5 +7,5 @@ WriteMakefile(
     'LIBS'	=> [''],   # e.g., '-lm' 
     'DEFINE'	=> '',     # e.g., '-DHAVE_SOMETHING' 
     'INC'	=> '-I.',     # e.g., '-I/usr/include/other'
-    'OBJECT'    => q[Solaris$(OBJ_EXT) password$(OBJ_EXT)],
+    'OBJECT'    => q[Solaris$(OBJ_EXT))],
 );

@@ -20,7 +20,7 @@ print "ok 1\n";
 
 # test of NO_CREATE
 undef @info;
-@info = getpwnam("tBoBt"); # a very unlikely candidate
+@info = mgetpwnam("tBoBt"); # a very unlikely candidate
 if (defined($info[0])) {
     print "please modify test.pl tBoBt username to one that doesn't exist on your system\n";
     exit;
@@ -39,6 +39,7 @@ if ($err != 2) {
 }
 
 $err = setpwinfo(@info);
+#print "err = [$err]\n";
 if ($err != 0) {
     print "not ok 3 [err = $err, $!]\n";
     exit;
@@ -47,35 +48,30 @@ if ($err != 0) {
 }
 
 $info[4] = "Bob Test";
+push @info, 0, 0, 99999, 7, 1, 2;
 
 $err = modpwinfo(@info);
 if ($err != 0) {
     print "not ok 4 [err = $err, $!]\n";
     exit;
 }
-@info = getpwnam($info[0]);
-if ($info[6] ne "Bob Test") {
-    print "not ok 4, entry was changed to @info\n";
+
+@change = mgetpwnam($info[0]);
+if (($change[4] ne "Bob Test") || ($change[12] != 2)) {
+    print "not ok 4, entry was changed to @change\n";
 } else {
     print "ok 4\n";
-    $save = $info[1];
-}
-
-@info = mgetpwnam($info[0]);
-if ($info[1] eq $save) {
-    print "not ok 5, mgetpwnam matched with getpwnam (are you root?)\n";
-} else {
-    print "ok 5, got $info[1] for crypted passwd (should be *LK*)\n";
 }
 
 $err = rmpwnam($info[0]);
 if ($err != 0) {
-    print "not ok 6 [you will need to delete user entry for $info[0]\n";
+    print "not ok 5 [you will need to delete user entry for $info[0]\n";
     print "[err = $err, $!]\n";
 }
+
 @info = getpwnam($info[0]);
 if (defined($info[0])) {
-    print "not ok 6, $info[0] still exists rmpwnam failed (you'll have to delete)\n";
+    print "not ok 5, $info[0] still exists rmpwnam failed (you'll have to delete)\n";
 } else {
-    print "ok 6, successfully removed $info[0]\n";
+    print "ok 5, successfully removed $info[0]\n";
 }

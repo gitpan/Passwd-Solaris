@@ -4,6 +4,4 @@ Makefile.PL
 Solaris.pm
 Solaris.xs
 test.pl
-typemap
-password.c
-password.h
+META.yml                                 Module meta-data (added by MakeMaker)
